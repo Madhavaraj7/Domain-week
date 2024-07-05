@@ -19,9 +19,8 @@ console.log(user);
 user.shift(); // remove first of the array
 console.log(user);
 
-
-
-
 console.log(user.indexOf(3));
 
 console.log(Array.from("Madhav"));
+
+
