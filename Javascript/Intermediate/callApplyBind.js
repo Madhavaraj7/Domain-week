@@ -1,12 +1,12 @@
 // The call method calls a function with a given this value and arguments provided individually.
 
-function greet(greeting) {
-  console.log(greeting + "," + this.name);
-}
+// function greet(greeting) {
+//   console.log(greeting + "," + this.name);
+// }
 
-const person1 = { name: "Madhav" };
+// const person1 = { name: "Madhav" };
 
-greet.call(person1,"hello")
+// greet.call(person1,"hello")
 
 // The apply method calls a function with a given this value, and arguments provided as an array (or array-like object).
 
@@ -28,3 +28,13 @@ greet.call(person1,"hello")
 
 // const boundGreet = greet.bind(person, "Hello");
 // boundGreet("!");
+
+// function Setname(greeting) {
+//   console.log(greeting + "," + this.name);
+// }
+
+// const person = { name: "Madhav" };
+
+// Setname.call(person, "Hello");
+
+
