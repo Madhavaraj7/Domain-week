@@ -23,7 +23,7 @@ let newpro2 = new Promise((resolve, reject) => {
 });
 
 
-const allProm = Promise.any([newpro1, newpro2]);
+const allProm = Promise.allSettled([newpro1, newpro2]);
 
 
 allProm

@@ -1,15 +1,17 @@
-// import fs from "fs";
+import fs from "fs";
 // import { inflate } from "zlib";
 
-// const filePath = "Node.js/file.txt";
+const filePath = "Node.js/file.txt";
 
-// fs.readFile(filePath, "utf-8", (error, data) => {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log(data);
-//   }
-// });
+console.log("first");
+fs.readFile(filePath, "utf-8", (error, data) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(data);
+  }
+});
+console.log("third");
 
 // // fs.appendFile(filePath, "Hello jithin \n", (err, sucess) => {
 // //   if (err) {

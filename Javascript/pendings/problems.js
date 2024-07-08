@@ -39,7 +39,6 @@
 
 // console.log(secondLargestNumber(arr));
 
-
 // generator functoion to generate even numbers endlessly
 
 function* genarotorFn(limit) {
@@ -54,3 +53,5 @@ const newFn = genarotorFn(10);
 for (let i = 0; i < 5; i++) {
   console.log(newFn.next().value);
 }
+
+
