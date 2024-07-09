@@ -1,0 +1,146 @@
+CRUD Method Database:
+
+// # Database
+Create :
+    use Database;
+Read :
+    show Databese;
+
+Delete :
+    db.dropDatabase();
+
+
+// # collections
+
+Create : 
+    db.createCollectin('collectionName')
+Read  :
+    show collections;
+update :
+    db.collectionName.renameCollection('newName');
+Delete :
+    db.collectionName.drop()
+
+
+// # Document
+
+Create:
+    db.collectionName.insertOne({collection})    // * this for insert one collection
+    db.collectionName.insertMany([{}]) // * this.for for insert multiple document
+
+Read :
+    db.collectionName.findOne()         //* using for finding one document and it show only 19 document
+    db.collectionName.find()            //* using for finding Multiple document
+
+Update :
+    db.collection.updateOne({// here codition},{$set:{//here mention the value}})
+    db.collection.updateMany({},{$set:{}})
+    db.collectionName.findOneAndUpdate({},{$set:{//here mention the value}})
+
+Replace :
+    db.collectionName.findOneAndReplace({//here mention the condition},{// here mention the value})  // * it will Replace the entire document particulre object based on that condition
+
+Delete :
+    db.collectionName.deleteOne({// here mention condition});
+    db.collectionName.deleteMany({// here mention condition})
+    db.collectionName.findOneAndDelete({// here mention condition})
+
+// # filed inside the document
+
+Create :
+    db.collectionName.updateOne({// here condition},{$set:{}})  // using update query we can create filed
+    db.collectionName.updateMany({// here condition},{$set:{}})  // using update query we can create filed
+
+Read :
+    db.collectionName.findOne()
+    db.collectionName.find()
+
+update : 
+    db.collecionName.updateOne({//mention the unique},{$set :{filed : new value}})
+    db.collecionName.updateMany({//mention the unique},{$set :{filed : new value}})
+    db.collecionName.findOneAndUpdate({//mention the unique},{$set :{filed : new value}})
+
+delete :
+
+    db.collectionName.updateOne({//here condition},{$unset:{filed:value}})
+    db.collectionName.updateOne({//here condition},{$unset:{filed:"$field}})  // * we not sure about the value means we can mention the filed with $ symbol
+    db.collectionName.updateMany({//here condition},{$unset:{filed:"$field}})   
+
+Rename the filed :
+
+    db.collecionName.updateOne({//condition},{$rename:{'oldName':'New name'}});
+
+
+
+// **********************CRUD OPERATION FINISHED****************************************
+
+
+// **************************USE QUERY********************************************
+
+
+// # to.Array()
+
+    db.collectionName.find().toArray()
+
+// # forEach
+    db.collectionName.find().forEach((val)=>{     // *it wil coming one by one document
+        print(val)
+    })
+
+// # distinct
+
+    db.collectionName.distinct()  // * it use for we want to value only in side of the every document but inside of the bracket we should mention that key it will give the value of array format example : we want age from every document we can use distinct('age') it will give [21,32,13,15]
+
+// # sort 
+    ascending order :
+
+        db.collectionName.find().sort('mention the field').forEach((val)=>{
+        print(val)
+    })
+
+    descending order : 
+        db.collectionName.find().sort({field:-1})
+
+// # skip
+
+    db.collectionName.find().sort().skip('mention the home many skip')
+
+// # count
+
+    db.collectionName.find().count()
+
+
+
+// # capped collection
+
+    db.createCollection('new name',{capped:true,autonIndexId:true,size:123455,max:100})  //size is mention the size of the document how many bytes, max allow the total number of document
+
+
+// # find above some value
+    db.collectionName({fildName:{$gt:value}})
+    db.collectionName({fildName:{$gte:value}})
+
+// # find bellow some value
+    db.collectionName({fildName:{$lt:value}})
+    db.collectionName({fildName :{$lte:value}})
+
+// # array
+
+    db.collectionName.updateOne({},{$push:{field:value}})
+    db.collectionName.updateOne({},{$push:{field:{$each:['val','val','val']}}})
+    db.collectionName.updateOne({},{$addToSet:{field:{$each:['val','val']}}})   // * using for array only accepting unique value
+    db.collectionName.updateOne({},{$pull:{field:'val'}})
+    db.collectionName.updateOne({},{$pull:{field:{$in:['val','val']}}})
+
+
+// # aggregation
+
+// # group
+
+// the avg of users age based on their gender
+db.people.aggregate([{$group:{_id:"$gender",averageAge:{$avg:"$age"}}}])
+
+// list the comman fruits and count the how many users have that
+db.people.aggregate([{$group:{_id:"$favoriteFruit",count:{$sum:1}}}]) 
+// sort and limit based on that above count 
+db.people.aggregate([{$group:{_id:"$favoriteFruit",count:{$sum:1}}},{$sort:{count:1}},{$limit:2}])
