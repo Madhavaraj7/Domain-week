@@ -1,27 +1,23 @@
-
-
 // primitive value
 //deep copy
-let a = 10
+let a = 10;
 
-let b = a
-a = 15
-console.log(a)
-console.log(b)
-
-
+let b = a;
+a = 15;
+console.log(a);
+console.log(b);
 
 // non primitive value
 // shallow copy
 
-
 let obj = {
-    name:'madhav'
-}
+  name: "madhav",
+};
 
-let obj1 = obj
+let obj1 = obj;
 
-obj.name = 'MERN'
+obj.name = "MERN";
 
-console.log(obj)
-console.log(obj1)
+console.log(obj);
+console.log(obj1);
+
