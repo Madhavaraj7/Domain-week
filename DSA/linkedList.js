@@ -166,6 +166,25 @@ class LinkedList {
       console.log(listValues);
     }
   }
+
+  deleteMiddle() {
+    if (this.size === 0) return undefined;
+   
+
+    let slow = this.head;
+    let fast = this.head;
+    let prev = null;
+
+    while (fast && fast.next) {
+      prev = slow;
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    prev.next = slow.next;
+    this.size--;
+    return slow.val;
+  }
 }
 
 const list = new LinkedList();
@@ -175,17 +194,23 @@ list.AddToLast(20);
 list.AddToLast(30);
 list.AddToLast(40);
 list.AddToLast(50);
-list.AddToFirst(5);
-console.log("removed value", list.removeLast());
-console.log("removed First", list.removeFirst());
+list.AddToLast(60);
+list.AddToLast(70);
+
+
 list.print();
-list.insert(10, 0);
-list.print();
-list.reverse();
-list.print();
-list.removeValue(30);
-list.print();
-list.removeIndex(0);
+
+console.log("midlle value:", list.deleteMiddle());
+// console.log("removed value", list.removeLast());
+// console.log("removed First", list.removeFirst());
+// list.print();
+// list.insert(10, 0);
+// list.print();
+// list.reverse();
+// list.print();
+// list.removeValue(30);
+// list.print();
+// list.removeIndex(0);
 list.print();
 
 // console.log(list);

@@ -37,22 +37,51 @@ class binarySearchTree {
   }
 
   print(root = this.root, result = []) {
-    if (root === null) {
+    if (root) {
+      this.print(root.left, result);
+      result.push(root.val);
+      this.print(root.right, result);
       return result;
     }
-    this.print(root.left, result);
-    result.push(root.val);
-    this.print(root.right, result);
+  }
+
+  bfs() {
+    if (!this.root) {
+      return null;
+    }
+
+    const queue = [];
+    const result = [];
+
+    queue.push(this.root);
+
+    while (queue.length) {
+      let curr = queue.shift();
+      result.push(curr);
+      if (curr.left) {
+        queue.push(curr.left);
+      }
+      if (curr.right) {
+        queue.push(curr.right);
+      }
+    }
     return result;
+  }
+
+  min(root) {
+    if (!root.left) {
+      return root.val;
+    } else {
+      return this.min(root.left);
+    }
   }
 }
 
 const bst = new binarySearchTree();
-
-bst.insert(10);
 bst.insert(20);
-bst.insert(30);
-bst.insert(40);
-bst.insert(50);
-bst.insert(60);
-console.log(bst.print());
+bst.insert(10);
+bst.insert(38);
+bst.insert(12);
+bst.insert(12);
+console.log(bst.bfs());
+console.log(bst.min((bst.root)));
