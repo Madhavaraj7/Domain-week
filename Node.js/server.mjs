@@ -14,19 +14,32 @@ app.get("/number/:n", (req, res) => {
       arr.push(i);
     }
   }
-  res.send(arr)
+  res.send(arr);
 });
 
-app.get('/search', (req, res) => {
+app.get("/search", (req, res) => {
   const searchQuery = req.query.q;
   res.send(`Search Query: ${searchQuery}`);
 });
 
 // Route with both req.params and req.query
-app.get('/user/:id/details', (req, res) => {
+app.get("/user/:id/details", (req, res) => {
   const userId = req.params.id;
   const filter = req.query.filter;
   res.send(`User ID: ${userId}, Filter: ${filter}`);
+});
+
+app.get("/error", (req, res, next) => {
+  const error = new Error("Something went wrong");
+  error.status = 500;
+  next(error);
+});
+
+app.use((err, req, res, next) => {
+  // console.error(err.stack);
+  res.status(err.status || 500).json({
+    message: err.message,
+  });
 });
 
 app.listen(3000, () => {

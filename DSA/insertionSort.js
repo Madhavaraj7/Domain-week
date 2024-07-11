@@ -8,7 +8,7 @@ function insertionSort(arr) {
     }
     arr[j + 1] = key;
   }
-  return arr
+  return arr;
 }
 
 console.log(insertionSort([22, 3, 44, 12, 21, 55, 2]));

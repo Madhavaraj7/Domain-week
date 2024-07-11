@@ -1,58 +1,64 @@
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
-}
-
-class binarySearchTree {
+class Minheap {
   constructor() {
-    this.root = null;
+    this.heap = [];
   }
 
   insert(val) {
-    const node = new Node(val);
-    if (!this.root) {
-      this.root = node;
-    } else {
-      this.insertNode(this.root, node);
+    let A = this.heap;
+    A.push(val);
+
+    let i = A.length - 1;
+
+    while (A.length > 1 && A[i] < A[this.parent(i)]) {
+      [A[i], A[this.parent(i)]] = [A[this.parent(i)], A[i]];
+      i = this.parent(i);
     }
   }
 
-  insertNode(root, node) {
-    if (node.val < root.val) {
-      if (root.left === null) {
-        root.left = node;
-      } else {
-        this.insertNode(root.left, node);
-      }
-    } else {
-      if (root.right === null) {
-        root.right = node;
-      } else {
-        this.insertNode(root.right, node);
+  extractMin() {
+    const A = this.heap;
+    const min = A[0];
+    A[0] = A.length - 1;
+
+    let i = 0;
+
+    while (i < A.length) {
+      let C =
+        A[this.child1(i)] < A[this.child2(i)] ? this.child1(i) : this.child2(i);
+      if (A[C] < A[i]) {
+        [A[i], A[C]] = [A[C], A[i]];
+        i = C;
+      }else{
+        break
       }
     }
+    A.pop()
+    return min
   }
 
-  print(root = this.root, result = []) {
-    if (root === null) {
-      return result;
-    }
-    this.print(root.left, result);
-    result.push(root.val);
-    this.print(root.right, result);
-    return result;
+  parent(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  child1(index) {
+    return index * 2 + 1;
+  }
+
+  child2(index) {
+    return index * 2 + 2;
   }
 }
 
-const bst = new binarySearchTree();
+const heap = new Minheap();
+heap.insert(10);
+heap.insert(20);
+heap.insert(30);
+heap.insert(11);
+heap.insert(40);
+heap.insert(50);
+heap.insert(4);
+console.log(heap.heap);
+heap.extractMin()
+heap.extractMin()
+console.log(heap.heap);
 
-bst.insert(10);
-bst.insert(20);
-bst.insert(30);
-bst.insert(40);
-bst.insert(50);
-bst.insert(60);
-console.log(bst.print());

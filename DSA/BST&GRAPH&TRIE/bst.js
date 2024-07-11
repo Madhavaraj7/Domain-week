@@ -67,7 +67,6 @@ class binarySearchTree {
     }
     return result;
   }
-
   min(root) {
     if (!root.left) {
       return root.val;
@@ -75,13 +74,38 @@ class binarySearchTree {
       return this.min(root.left);
     }
   }
+
+  Height(node = this.root) {
+    if (!node) {
+      return -1;
+    }
+    let leftHeight = this.Height(node.left);
+    let rightHeight = this.Height(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  isBalanced(node = this.root) {
+    if (!node) {
+      return true;
+    }
+    const HeightDiffernce = Math.abs(
+      this.Height(node.left) - this.Height(node.right)
+    );
+    if (HeightDiffernce > 1) {
+      return false;
+    }
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
+  }
 }
 
 const bst = new binarySearchTree();
 bst.insert(20);
 bst.insert(10);
 bst.insert(38);
-bst.insert(12);
-bst.insert(12);
+bst.insert(3);
+
+
 console.log(bst.bfs());
-console.log(bst.min((bst.root)));
+console.log(bst.min(bst.root));
+console.log(bst.Height());
+console.log(bst.isBalanced());

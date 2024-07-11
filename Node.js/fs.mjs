@@ -13,23 +13,23 @@ fs.readFile(filePath, "utf-8", (error, data) => {
 });
 console.log("third");
 
-// // fs.appendFile(filePath, "Hello jithin \n", (err, sucess) => {
-// //   if (err) {
-// //     console.log(err);
-// //   } else {
-// //     console.log(sucess);
-// //   }
-// // });
+// fs.appendFile(filePath, "Hello jithin \n", (err, sucess) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(sucess);
+//   }
+// });
 
-// // fs.unlink(filePath, (unlinkError) => {
-// //   if (unlinkError) {
-// //     console.log('Error deleting file:', unlinkError);
-// //   } else {
-// //     console.log('File deleted successfully');
-// //   }
-// // });
+fs.unlink(filePath, (unlinkError) => {
+  if (unlinkError) {
+    console.log('Error deleting file:', unlinkError);
+  } else {
+    console.log('File deleted successfully');
+  }
+});
 
-// fs.writeFile(filePath, "", (err, data) => {
+// fs.writeFile(filePath, "Hello suresh", (err, data) => {
 //   if (err) {
 //     console.log(err);
 //   } else {
