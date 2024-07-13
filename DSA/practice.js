@@ -1,41 +1,74 @@
-class TreeNode {
+class MinHeap {
   constructor() {
-    this.child = {};
-    this.endWord = false;
-  }
-}
-
-class Trie {
-  constructor() {
-    this.root = new TreeNode();
+    this.heap = [];
   }
 
-  insert(word) {
-    let curr = this.root;
-    for (let c of word) {
-      if (!curr.child[c]) {
-        curr.child[c] = new TreeNode();
+  insert(val) {
+    let A = this.heap;
+    A.push(val);
+
+    let i = A.length - 1;
+    while (A.length > 1 && A[i] < A[this.parent(i)]) {
+      [A[i], A[this.parent(i)]] = [A[this.parent(i)], A[i]];
+      i = this.parent(i);
+    }
+  }
+
+  extractMin() {
+    let A = this.heap;
+    let min = A[0];
+    A[0] = A[A.length - 1];
+
+    let i = 0;
+    while (i < A.length) {
+      let C =
+        A[this.child1(i)] < A[this.child2(i)] ? this.child1(i) : this.child2(i);
+      if (A[C] < A[i]) {
+        [A[C], A[i]] = [A[i], A[C]];
+        i = C;
+      } else {
+        break;
       }
-      curr = curr.child[c];
     }
-    curr.endWord = true;
+    A.pop();
+    return min;
   }
 
-  print(curr = this.root, word = "", result = []) {
-    if (curr.endWord) {
-      result.push(word);
+  nthSmallest(n) {
+    if (n > this.heap.length) {
+      return null;
     }
 
-    for (let c in curr.child) {
-      this.print(curr.child[c], word + c, result);
-    }
+    let heapCopy = [...this.heap];
+    // console.log(heapCopy);
+    let tempHeap = new MinHeap();
+    tempHeap.heap = heapCopy;
 
-    return result;
+    let nthMin;
+    for (let i = 0; i < n; i++) {
+      nthMin = tempHeap.extractMin();
+      // console.log(nthMin);
+    }
+    return nthMin;
+  }
+
+  parent(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  child1(index) {
+    return index * 2 + 1;
+  }
+  child2(index) {
+    return index * 2 + 2;
   }
 }
 
-const list = new Trie();
-list.insert("Madhav")
-list.insert("Madhavaraj")
-list.insert("Hari")
-console.log(list.print());
+const heap = new MinHeap();
+heap.insert(10);
+heap.insert(22);
+heap.insert(2);
+heap.insert(34);
+heap.insert(1);
+console.log(heap.heap);
+console.log(heap.nthSmallest(3));

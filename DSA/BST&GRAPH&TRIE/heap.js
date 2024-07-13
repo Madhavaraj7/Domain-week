@@ -36,6 +36,24 @@ class MinHeap {
       A.pop();
       return min;
     } //Time: O(log n) no.of nodes | space: O(1)
+
+    nthSmallest(n) {
+      if (n > this.heap.length) {
+        return null; // Or handle it as per your requirement
+      }
+      const heapCopy = [...this.heap];
+      // console.log(heapCopy);
+      const tempHeap = new MinHeap();
+      // console.log(tempHeap);
+      tempHeap.heap = heapCopy;
+      // console.log(tempHeap.heap);
+  
+      let nthMin;
+      for (let i = 0; i < n; i++) {
+        nthMin = tempHeap.extractMin();
+      }
+      return nthMin;
+    }
   
   
     parent(index) {
@@ -58,7 +76,9 @@ class MinHeap {
   minHeap.insert(68);
   minHeap.insert(6);
   console.log(minHeap.heap);
-  minHeap.extractMin()
-  minHeap.extractMin()
+  console.log(minHeap.nthSmallest(1));
+  console.log(minHeap.nthSmallest(4));
+
+
 
   console.log(minHeap.heap);
