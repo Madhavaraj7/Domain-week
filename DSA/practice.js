@@ -1,11 +1,9 @@
-function* genaratorFn(a) {
-  while (true) {
-    yield Math.pow(a,(++a), +1);
+function reverseString(str, i = str.length - 1, result = "") {
+  if (i < 0) {
+    return "";
   }
+  result+=str[i];
+  return result + reverseString(str,--i);
 }
 
-let newFn = genaratorFn(2);
-
-for (let i = 0; i < 5; i++) {
-  console.log(newFn.next().value);
-}
+console.log(reverseString("Hello"));

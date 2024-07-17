@@ -1,32 +1,29 @@
-import React, { useReducer } from "react";
+import React, { useMemo, useState } from "react";
 
-function reducerFn (state,action) {
-  switch (action.type) {
-    case "increment":
-      return { count: state.count + 1 };
-    case "decrement":
-      return { count: state.count - 1 };
-
-    default:
-      return state;
-  }
-}
 function App() {
-  const [state, dispatch] = useReducer(reducerFn, { count: 0 });
+  const [count, setCount] = useState(0);
 
-  const HandlehangeIncrement = () => {
-    dispatch({ type: "increment" });
+  const handleChange = () => {
+    setCount(() => count + 1);
   };
 
-  const HandlehangeDecrement = () => {
-    dispatch({ type: "decrement" });
+  const handleChangeDecrement = () => {
+    if (count > 0) {
+      setCount(() => count - 1);
+    }
   };
+
+  const memo = useMemo(() => {
+    setCount(() => count + 1);
+  }, [count]);
+
+  
 
   return (
     <div>
-      <h1>{state.count}</h1>
-      <button onClick={HandlehangeIncrement}>Increment</button>
-      <button onClick={HandlehangeDecrement}>Decrement</button>
+      <p>{count}</p>
+      <button onClick={handleChange}>Increment</button>
+      <button onClick={handleChangeDecrement}>Decrement</button>
     </div>
   );
 }
