@@ -55,3 +55,15 @@ for (let i = 0; i < 5; i++) {
 }
 
 
+function* genFn(n) {
+  while (true) {
+    yield Math.pow(n,++n,n-1)
+  }
+}
+
+const newFn1 = genFn(2);
+console.log(newFn1.next().value);
+console.log(newFn1.next().value);
+console.log(newFn1.next().value);
+
+
