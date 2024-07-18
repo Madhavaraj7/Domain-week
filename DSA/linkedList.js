@@ -169,18 +169,14 @@ class LinkedList {
 
   deleteMiddle() {
     if (this.size === 0) return undefined;
-   
-
     let slow = this.head;
     let fast = this.head;
     let prev = null;
-
     while (fast && fast.next) {
       prev = slow;
       slow = slow.next;
       fast = fast.next.next;
     }
-
     prev.next = slow.next;
     this.size--;
     return slow.val;
