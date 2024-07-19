@@ -41,23 +41,23 @@
 
 // generator functoion to generate even numbers endlessly
 
-function* genarotorFn(limit) {
-  let n = 0;
-  while (n < limit) {
-    yield (n += 2);
-  }
-}
+// function* genarotorFn(limit) {
+//   let n = 0;
+//   while (n < limit) {
+//     yield (n += 2);
+//   }
+// }
 
-const newFn = genarotorFn(10);
+// const newFn = genarotorFn(10);
 
-for (let i = 0; i < 5; i++) {
-  console.log(newFn.next().value);
-}
+// for (let i = 0; i < 5; i++) {
+//   console.log(newFn.next().value);
+// }
 
 
 function* genFn(n) {
   while (true) {
-    yield Math.pow(n,++n,n-1)
+    yield Math.pow(n,++n)
   }
 }
 
